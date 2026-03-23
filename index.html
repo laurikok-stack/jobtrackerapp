@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Työnhakuseuranta</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>Työnhakuseuranta</h1>
+
+  <form id="jobForm">
+    <input type="text" id="jobTitle" placeholder="Työpaikan nimi" required><br><br>
+    <input type="text" id="company" placeholder="Yritys" required><br><br>
+
+    <select id="status">
+      <option value="Haettu">Haettu</option>
+      <option value="Haastattelu">Haastattelu</option>
+      <option value="Hylätty">Hylätty</option>
+    </select><br><br>
+
+    <button type="submit">Lisää hakemus</button>
+  </form>
+
+  <h2>Omat hakemukset</h2>
+  
+  <input type="text" id="searchInput" placeholder="Hae yrityksen tai työpaikan nimellä">
+<br><br>
+
+  <ul id="jobList"></ul>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
