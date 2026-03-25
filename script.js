@@ -21,9 +21,9 @@ function updateStats() {
   const haastattelu = jobs.filter(job => job.status === "Haastattelu").length;
   const hylatty = jobs.filter(job => job.status === "Hylätty").length;
 
-  countHaettu.textContent = haettu;
-  countHaastattelu.textContent = haastattelu;
-  countHylatty.textContent = hylatty;
+  if (countHaettu) countHaettu.textContent = haettu;
+  if (countHaastattelu) countHaastattelu.textContent = haastattelu;
+  if (countHylatty) countHylatty.textContent = hylatty;
 }
 
 function createJobElement(job, index) {
@@ -63,8 +63,10 @@ function createJobElement(job, index) {
 }
 
 function renderJobs() {
+  if (!jobList) return;
+
   jobList.innerHTML = "";
-  const searchText = searchInput.value.toLowerCase();
+  const searchText = searchInput ? searchInput.value.toLowerCase() : "";
 
   const filteredJobs = jobs.filter(job =>
     job.title.toLowerCase().includes(searchText) ||
@@ -79,19 +81,23 @@ function renderJobs() {
   updateStats();
 }
 
-form.addEventListener("submit", event => {
-  event.preventDefault();
+if (form) {
+  form.addEventListener("submit", event => {
+    event.preventDefault();
 
-  const jobTitle = document.getElementById("jobTitle").value;
-  const company = document.getElementById("company").value;
-  const status = document.getElementById("status").value;
+    const jobTitle = document.getElementById("jobTitle").value;
+    const company = document.getElementById("company").value;
+    const status = document.getElementById("status").value;
 
-  jobs.push({ title: jobTitle, company, status });
-  saveJobs();
-  renderJobs();
-  form.reset();
-});
+    jobs.push({ title: jobTitle, company, status });
+    saveJobs();
+    renderJobs();
+    form.reset();
+  });
+}
 
-searchInput.addEventListener("input", renderJobs);
+if (searchInput) {
+  searchInput.addEventListener("input", renderJobs);
+}
 
 renderJobs();
