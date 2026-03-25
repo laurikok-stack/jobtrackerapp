@@ -7,14 +7,37 @@
 <body>
 
   <h1>Työnhakuseuranta</h1>
-  
-  <div id="stats">
-  <h2>Tilastot</h2>
-  <p>Haettu: <span id="countHaettu">0</span></p>
-  <p>Haastattelu: <span id="countHaastattelu">0</span></p>
-  <p>Hylätty: <span id="countHylatty">0</span></p>
-</div>
 
+  <div class="dashboard">
+    <h2>Tilastot</h2>
+    <p>Yhteensä hakemuksia: <span id="countTotal">0</span></p>
+    <p>Haettu: <span id="countHaettu">0</span> (<span id="percentHaettu">0</span>%)</p>
+    <p>Haastattelu: <span id="countHaastattelu">0</span> (<span id="percentHaastattelu">0</span>%)</p>
+    <p>Hylätty: <span id="countHylatty">0</span> (<span id="percentHylatty">0</span>%)</p>
+
+    <h3>Hakemusputki</h3>
+
+    <div class="stat-block">
+      <div class="stat-label">Haettu</div>
+      <div class="progress-bar">
+        <div id="barHaettu" class="progress-fill fill-haettu"></div>
+      </div>
+    </div>
+
+    <div class="stat-block">
+      <div class="stat-label">Haastattelu</div>
+      <div class="progress-bar">
+        <div id="barHaastattelu" class="progress-fill fill-haastattelu"></div>
+      </div>
+    </div>
+
+    <div class="stat-block">
+      <div class="stat-label">Hylätty</div>
+      <div class="progress-bar">
+        <div id="barHylatty" class="progress-fill fill-hylatty"></div>
+      </div>
+    </div>
+  </div>
 
   <form id="jobForm">
     <input type="text" id="jobTitle" placeholder="Työpaikan nimi" required><br><br>
@@ -32,11 +55,10 @@
   <h2>Omat hakemukset</h2>
 
   <input type="text" id="searchInput" placeholder="Hae yrityksen tai työpaikan nimellä">
-<br><br>
+  <br><br>
 
   <ul id="jobList"></ul>
 
   <script src="script.js"></script>
-
 </body>
 </html>

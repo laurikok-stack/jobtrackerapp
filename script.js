@@ -5,10 +5,15 @@ const searchInput = document.getElementById("searchInput");
 const countHaettu = document.getElementById("countHaettu");
 const countHaastattelu = document.getElementById("countHaastattelu");
 const countHylatty = document.getElementById("countHylatty");
+
 const countTotal = document.getElementById("countTotal");
 const percentHaettu = document.getElementById("percentHaettu");
 const percentHaastattelu = document.getElementById("percentHaastattelu");
 const percentHylatty = document.getElementById("percentHylatty");
+
+const barHaettu = document.getElementById("barHaettu");
+const barHaastattelu = document.getElementById("barHaastattelu");
+const barHylatty = document.getElementById("barHylatty");
 
 let jobs = loadJobs();
 
@@ -38,6 +43,13 @@ function updateStats() {
   if (percentHaettu) percentHaettu.textContent = haettuPercent;
   if (percentHaastattelu) percentHaastattelu.textContent = haastatteluPercent;
   if (percentHylatty) percentHylatty.textContent = hylattyPercent;
+
+  if (barHaettu) barHaettu.style.width = `${haettuPercent}%`;
+  if (barHaastattelu) barHaastattelu.style.width = `${haastatteluPercent}%`;
+  if (barHylatty) barHylatty.style.width = `${hylattyPercent}%`;
+  console.log("percentHaettu:", percentHaettu);
+console.log("barHaettu:", barHaettu);
+console.log("haettuPercent:", haettuPercent);
 }
 
 function createJobElement(job, index) {
