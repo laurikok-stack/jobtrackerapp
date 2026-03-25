@@ -15,6 +15,10 @@ const barHaettu = document.getElementById("barHaettu");
 const barHaastattelu = document.getElementById("barHaastattelu");
 const barHylatty = document.getElementById("barHylatty");
 
+const countTarjous = document.getElementById("countTarjous");
+const percentTarjous = document.getElementById("percentTarjous");
+const barTarjous = document.getElementById("barTarjous");
+
 let jobs = loadJobs();
 
 function loadJobs() {
@@ -29,27 +33,29 @@ function updateStats() {
   const total = jobs.length;
   const haettu = jobs.filter(job => job.status === "Haettu").length;
   const haastattelu = jobs.filter(job => job.status === "Haastattelu").length;
+  const tarjous = jobs.filter(job => job.status === "Tarjous").length;
   const hylatty = jobs.filter(job => job.status === "Hylätty").length;
 
   const haettuPercent = total > 0 ? Math.round((haettu / total) * 100) : 0;
   const haastatteluPercent = total > 0 ? Math.round((haastattelu / total) * 100) : 0;
+  const tarjousPercent = total > 0 ? Math.round((tarjous / total) * 100) : 0;
   const hylattyPercent = total > 0 ? Math.round((hylatty / total) * 100) : 0;
 
   if (countTotal) countTotal.textContent = total;
   if (countHaettu) countHaettu.textContent = haettu;
   if (countHaastattelu) countHaastattelu.textContent = haastattelu;
+  if (countTarjous) countTarjous.textContent = tarjous;
   if (countHylatty) countHylatty.textContent = hylatty;
 
   if (percentHaettu) percentHaettu.textContent = haettuPercent;
   if (percentHaastattelu) percentHaastattelu.textContent = haastatteluPercent;
+  if (percentTarjous) percentTarjous.textContent = tarjousPercent;
   if (percentHylatty) percentHylatty.textContent = hylattyPercent;
 
   if (barHaettu) barHaettu.style.width = `${haettuPercent}%`;
   if (barHaastattelu) barHaastattelu.style.width = `${haastatteluPercent}%`;
+  if (barTarjous) barTarjous.style.width = `${tarjousPercent}%`;
   if (barHylatty) barHylatty.style.width = `${hylattyPercent}%`;
-  console.log("percentHaettu:", percentHaettu);
-console.log("barHaettu:", barHaettu);
-console.log("haettuPercent:", haettuPercent);
 }
 
 function createJobElement(job, index) {
@@ -59,7 +65,7 @@ function createJobElement(job, index) {
   textSpan.textContent = `${job.title} - ${job.company}`;
 
   const statusSelect = document.createElement("select");
-  ["Haettu", "Haastattelu", "Hylätty"].forEach(status => {
+  ["Haettu", "Haastattelu", "Tarjous", "Hylätty"].forEach(status => {
     const option = document.createElement("option");
     option.value = status;
     option.textContent = status;

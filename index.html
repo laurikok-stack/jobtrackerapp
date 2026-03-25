@@ -10,10 +10,11 @@
 
   <div class="dashboard">
     <h2>Tilastot</h2>
-    <p>Yhteensä hakemuksia: <span id="countTotal">0</span></p>
-    <p>Haettu: <span id="countHaettu">0</span> (<span id="percentHaettu">0</span>%)</p>
-    <p>Haastattelu: <span id="countHaastattelu">0</span> (<span id="percentHaastattelu">0</span>%)</p>
-    <p>Hylätty: <span id="countHylatty">0</span> (<span id="percentHylatty">0</span>%)</p>
+<p>Yhteensä hakemuksia: <span id="countTotal">0</span></p>
+<p>Haettu: <span id="countHaettu">0</span> (<span id="percentHaettu">0</span>%)</p>
+<p>Haastattelu: <span id="countHaastattelu">0</span> (<span id="percentHaastattelu">0</span>%)</p>
+<p>Tarjous: <span id="countTarjous">0</span> (<span id="percentTarjous">0</span>%)</p>
+<p>Hylätty: <span id="countHylatty">0</span> (<span id="percentHylatty">0</span>%)</p>
 
     <h3>Hakemusputki</h3>
 
@@ -32,6 +33,13 @@
     </div>
 
     <div class="stat-block">
+  <div class="stat-label">Tarjous</div>
+  <div class="progress-bar">
+    <div id="barTarjous" class="progress-fill fill-tarjous"></div>
+  </div>
+</div>
+
+    <div class="stat-block">
       <div class="stat-label">Hylätty</div>
       <div class="progress-bar">
         <div id="barHylatty" class="progress-fill fill-hylatty"></div>
@@ -44,10 +52,11 @@
     <input type="text" id="company" placeholder="Yritys" required><br><br>
 
     <select id="status">
-      <option value="Haettu">Haettu</option>
-      <option value="Haastattelu">Haastattelu</option>
-      <option value="Hylätty">Hylätty</option>
-    </select><br><br>
+  <option value="Haettu">Haettu</option>
+  <option value="Haastattelu">Haastattelu</option>
+  <option value="Tarjous">Tarjous</option>
+  <option value="Hylätty">Hylätty</option>
+</select><br><br>
 
     <button type="submit">Lisää hakemus</button>
   </form>
@@ -60,5 +69,6 @@
   <ul id="jobList"></ul>
 
   <script src="script.js"></script>
+  
 </body>
 </html>
