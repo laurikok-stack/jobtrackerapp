@@ -5,6 +5,10 @@ const searchInput = document.getElementById("searchInput");
 const countHaettu = document.getElementById("countHaettu");
 const countHaastattelu = document.getElementById("countHaastattelu");
 const countHylatty = document.getElementById("countHylatty");
+const countTotal = document.getElementById("countTotal");
+const percentHaettu = document.getElementById("percentHaettu");
+const percentHaastattelu = document.getElementById("percentHaastattelu");
+const percentHylatty = document.getElementById("percentHylatty");
 
 let jobs = loadJobs();
 
@@ -17,13 +21,23 @@ function saveJobs() {
 }
 
 function updateStats() {
+  const total = jobs.length;
   const haettu = jobs.filter(job => job.status === "Haettu").length;
   const haastattelu = jobs.filter(job => job.status === "Haastattelu").length;
   const hylatty = jobs.filter(job => job.status === "Hylätty").length;
 
+  const haettuPercent = total > 0 ? Math.round((haettu / total) * 100) : 0;
+  const haastatteluPercent = total > 0 ? Math.round((haastattelu / total) * 100) : 0;
+  const hylattyPercent = total > 0 ? Math.round((hylatty / total) * 100) : 0;
+
+  if (countTotal) countTotal.textContent = total;
   if (countHaettu) countHaettu.textContent = haettu;
   if (countHaastattelu) countHaastattelu.textContent = haastattelu;
   if (countHylatty) countHylatty.textContent = hylatty;
+
+  if (percentHaettu) percentHaettu.textContent = haettuPercent;
+  if (percentHaastattelu) percentHaastattelu.textContent = haastatteluPercent;
+  if (percentHylatty) percentHylatty.textContent = hylattyPercent;
 }
 
 function createJobElement(job, index) {

@@ -60,5 +60,15 @@ li {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-li
+#stats {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  max-width: 300px;
+  margin: 20px auto;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  text-align: center;
+}
 
+
+li
