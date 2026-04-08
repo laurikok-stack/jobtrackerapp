@@ -92,6 +92,8 @@ function createJobElement(job, index) {
 function createPipelineCard(job, index) {
   const card = document.createElement("div");
   card.className = "pipeline-card";
+  card.draggable = true;
+  card.dataset.index = index;
 
   const title = document.createElement("strong");
   title.textContent = job.title;
@@ -112,6 +114,10 @@ function createPipelineCard(job, index) {
     jobs[index].status = select.value;
     saveJobs();
     renderJobs();
+  });
+
+  card.addEventListener("dragstart", (event) => {
+    event.dataTransfer.setData("text/plain", index);
   });
 
   card.appendChild(title);
@@ -187,4 +193,25 @@ if (searchInput) {
   searchInput.addEventListener("input", renderJobs);
 }
 
-renderJobs();
+function setupDropZone(column, newStatus) {
+  if (!column) return;
+
+  column.addEventListener("dragover", (event) => {
+    event.preventDefault();
+  });
+
+  column.addEventListener("drop", (event) => {
+    event.preventDefault();
+
+    const index = event.dataTransfer.getData("text/plain");
+    if (index === "") return;
+
+    jobs[index].status = newStatus;
+    saveJobs();
+setupDropZone(columnHaettu, "Haettu");
+setupDropZone(columnHaastattelu, "Haastattelu");
+setupDropZone(columnTarjous, "Tarjous");
+setupDropZone(columnHylatty, "Hylätty");
+    renderJobs();
+  });
+}
