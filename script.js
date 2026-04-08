@@ -122,6 +122,13 @@ function createPipelineCard(job, index) {
 }
 
 function renderPipeline() {
+  if (jobs.length === 0) {
+  columnHaettu.innerHTML = "<p class='empty'>Ei hakemuksia vielä</p>";
+  columnHaastattelu.innerHTML = "";
+  columnTarjous.innerHTML = "";
+  columnHylatty.innerHTML = "";
+  return;
+}
   if (!columnHaettu || !columnHaastattelu || !columnTarjous || !columnHylatty) return;
 
   columnHaettu.innerHTML = "";
