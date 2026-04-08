@@ -11,10 +11,6 @@ const percentHaettu = document.getElementById("percentHaettu");
 const percentHaastattelu = document.getElementById("percentHaastattelu");
 const percentHylatty = document.getElementById("percentHylatty");
 
-const barHaettu = document.getElementById("barHaettu");
-const barHaastattelu = document.getElementById("barHaastattelu");
-const barHylatty = document.getElementById("barHylatty");
-
 const countTarjous = document.getElementById("countTarjous");
 const percentTarjous = document.getElementById("percentTarjous");
 const barTarjous = document.getElementById("barTarjous");
@@ -51,11 +47,6 @@ function updateStats() {
   if (percentHaastattelu) percentHaastattelu.textContent = haastatteluPercent;
   if (percentTarjous) percentTarjous.textContent = tarjousPercent;
   if (percentHylatty) percentHylatty.textContent = hylattyPercent;
-
-  if (barHaettu) barHaettu.style.width = `${haettuPercent}%`;
-  if (barHaastattelu) barHaastattelu.style.width = `${haastatteluPercent}%`;
-  if (barTarjous) barTarjous.style.width = `${tarjousPercent}%`;
-  if (barHylatty) barHylatty.style.width = `${hylattyPercent}%`;
 }
 
 function createJobElement(job, index) {
