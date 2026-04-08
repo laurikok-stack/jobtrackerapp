@@ -40,36 +40,30 @@
   </div>
 </div>
 
-    <h3>Hakemusputki</h3>
+<h2>Hakemusputki</h2>
+<p class="section-description">Seuraa hakemustesi etenemistä vaihe vaiheelta.</p>
 
-    <div class="stat-block">
-      <div class="stat-label">Haettu</div>
-      <div class="progress-bar">
-        <div id="barHaettu" class="progress-fill fill-haettu"></div>
-      </div>
-    </div>
+<div class="pipeline">
+  <div class="pipeline-column column-haettu">
+    <h3>Haettu</h3>
+    <div id="columnHaettu" class="pipeline-list"></div>
+  </div>
 
-    <div class="stat-block">
-      <div class="stat-label">Haastattelu</div>
-      <div class="progress-bar">
-        <div id="barHaastattelu" class="progress-fill fill-haastattelu"></div>
-      </div>
-    </div>
+  <div class="pipeline-column column-haastattelu">
+    <h3>Haastattelu</h3>
+    <div id="columnHaastattelu" class="pipeline-list"></div>
+  </div>
 
-    <div class="stat-block">
-  <div class="stat-label">Tarjous</div>
-  <div class="progress-bar">
-    <div id="barTarjous" class="progress-fill fill-tarjous"></div>
+  <div class="pipeline-column column-tarjous">
+    <h3>Tarjous</h3>
+    <div id="columnTarjous" class="pipeline-list"></div>
+  </div>
+
+  <div class="pipeline-column column-hylatty">
+    <h3>Hylätty</h3>
+    <div id="columnHylatty" class="pipeline-list"></div>
   </div>
 </div>
-
-    <div class="stat-block">
-      <div class="stat-label">Hylätty</div>
-      <div class="progress-bar">
-        <div id="barHylatty" class="progress-fill fill-hylatty"></div>
-      </div>
-    </div>
-  </div>
 
   <form id="jobForm">
     <input type="text" id="jobTitle" placeholder="Työpaikan nimi" required><br><br>
