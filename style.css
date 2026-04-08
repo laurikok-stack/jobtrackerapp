@@ -280,4 +280,15 @@ li {
   margin-top: -8px;
   margin-bottom: 18px;
 }
+@media (max-width: 900px) {
+  .pipeline {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .pipeline {
+    grid-template-columns: 1fr;
+  }
+}
 }
