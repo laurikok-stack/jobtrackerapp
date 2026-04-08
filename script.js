@@ -15,6 +15,11 @@ const countTarjous = document.getElementById("countTarjous");
 const percentTarjous = document.getElementById("percentTarjous");
 const barTarjous = document.getElementById("barTarjous");
 
+const columnHaettu = document.getElementById("columnHaettu");
+const columnHaastattelu = document.getElementById("columnHaastattelu");
+const columnTarjous = document.getElementById("columnTarjous");
+const columnHylatty = document.getElementById("columnHylatty");
+
 let jobs = loadJobs();
 
 function loadJobs() {
@@ -84,7 +89,60 @@ function createJobElement(job, index) {
 
   return li;
 }
+function createPipelineCard(job, index) {
+  const card = document.createElement("div");
+  card.className = "pipeline-card";
 
+  const title = document.createElement("strong");
+  title.textContent = job.title;
+
+  const company = document.createElement("p");
+  company.textContent = job.company;
+
+  const select = document.createElement("select");
+  ["Haettu", "Haastattelu", "Tarjous", "Hylätty"].forEach(status => {
+    const option = document.createElement("option");
+    option.value = status;
+    option.textContent = status;
+    if (status === job.status) option.selected = true;
+    select.appendChild(option);
+  });
+
+  select.addEventListener("change", () => {
+    jobs[index].status = select.value;
+    saveJobs();
+    renderJobs();
+  });
+
+  card.appendChild(title);
+  card.appendChild(company);
+  card.appendChild(select);
+
+  return card;
+}
+
+function renderPipeline() {
+  if (!columnHaettu || !columnHaastattelu || !columnTarjous || !columnHylatty) return;
+
+  columnHaettu.innerHTML = "";
+  columnHaastattelu.innerHTML = "";
+  columnTarjous.innerHTML = "";
+  columnHylatty.innerHTML = "";
+
+  jobs.forEach((job, index) => {
+    const card = createPipelineCard(job, index);
+
+    if (job.status === "Haettu") {
+      columnHaettu.appendChild(card);
+    } else if (job.status === "Haastattelu") {
+      columnHaastattelu.appendChild(card);
+    } else if (job.status === "Tarjous") {
+      columnTarjous.appendChild(card);
+    } else if (job.status === "Hylätty") {
+      columnHylatty.appendChild(card);
+    }
+  });
+}
 function renderJobs() {
   if (!jobList) return;
 
@@ -100,8 +158,8 @@ function renderJobs() {
     const li = createJobElement(job, index);
     jobList.appendChild(li);
   });
-
-  updateStats();
+renderPipeline();
+updateStats();
 }
 
 if (form) {
