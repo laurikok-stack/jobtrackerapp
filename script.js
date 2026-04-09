@@ -1,7 +1,4 @@
 const form = document.getElementById("jobForm");
-const jobList = document.getElementById("jobList");
-const searchInput = document.getElementById("searchInput");
-
 const countHaettu = document.getElementById("countHaettu");
 const countHaastattelu = document.getElementById("countHaastattelu");
 const countHylatty = document.getElementById("countHylatty");
@@ -54,41 +51,6 @@ function updateStats() {
   if (percentHylatty) percentHylatty.textContent = hylattyPercent;
 }
 
-function createJobElement(job, index) {
-  const li = document.createElement("li");
-
-  const textSpan = document.createElement("span");
-  textSpan.textContent = `${job.title} - ${job.company}`;
-
-  const statusSelect = document.createElement("select");
-  ["Haettu", "Haastattelu", "Tarjous", "Hylätty"].forEach(status => {
-    const option = document.createElement("option");
-    option.value = status;
-    option.textContent = status;
-    if (status === job.status) option.selected = true;
-    statusSelect.appendChild(option);
-  });
-
-  statusSelect.addEventListener("change", () => {
-    jobs[index].status = statusSelect.value;
-    saveJobs();
-    renderJobs();
-  });
-
-  const deleteBtn = document.createElement("button");
-  deleteBtn.textContent = "Poista ❌";
-  deleteBtn.addEventListener("click", () => {
-    jobs.splice(index, 1);
-    saveJobs();
-    renderJobs();
-  });
-
-  li.appendChild(textSpan);
-  li.appendChild(statusSelect);
-  li.appendChild(deleteBtn);
-
-  return li;
-}
 function createPipelineCard(job, index) {
   const card = document.createElement("div");
   card.className = "pipeline-card";
@@ -116,6 +78,14 @@ function createPipelineCard(job, index) {
     renderJobs();
   });
 
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "Poista";
+  deleteBtn.addEventListener("click", () => {
+    jobs.splice(index, 1);
+    saveJobs();
+    renderJobs();
+  });
+
   card.addEventListener("dragstart", (event) => {
     event.dataTransfer.setData("text/plain", index);
   });
@@ -123,6 +93,7 @@ function createPipelineCard(job, index) {
   card.appendChild(title);
   card.appendChild(company);
   card.appendChild(select);
+  card.appendChild(deleteBtn);
 
   return card;
 }
@@ -154,24 +125,9 @@ function renderPipeline() {
     }
   });
 }
-}
 function renderJobs() {
-  if (!jobList) return;
-
-  jobList.innerHTML = "";
-  const searchText = searchInput ? searchInput.value.toLowerCase() : "";
-
-  const filteredJobs = jobs.filter(job =>
-    job.title.toLowerCase().includes(searchText) ||
-    job.company.toLowerCase().includes(searchText)
-  );
-
-  filteredJobs.forEach((job, index) => {
-    const li = createJobElement(job, index);
-    jobList.appendChild(li);
-  });
-renderPipeline();
-updateStats();
+  renderPipeline();
+  updateStats();
 }
 
 if (form) {
@@ -189,29 +145,28 @@ if (form) {
   });
 }
 
-if (searchInput) {
-  searchInput.addEventListener("input", renderJobs);
-}
-
 function setupDropZone(column, newStatus) {
   if (!column) return;
 
   column.addEventListener("dragover", (event) => {
     event.preventDefault();
+    column.classList.add("drag-over");
+  });
+
+  column.addEventListener("dragleave", () => {
+    column.classList.remove("drag-over");
   });
 
   column.addEventListener("drop", (event) => {
     event.preventDefault();
+
+    column.classList.remove("drag-over");
 
     const index = event.dataTransfer.getData("text/plain");
     if (index === "") return;
 
     jobs[index].status = newStatus;
     saveJobs();
-setupDropZone(columnHaettu, "Haettu");
-setupDropZone(columnHaastattelu, "Haastattelu");
-setupDropZone(columnTarjous, "Tarjous");
-setupDropZone(columnHylatty, "Hylätty");
     renderJobs();
   });
 }

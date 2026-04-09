@@ -303,4 +303,21 @@ li {
   font-size: 14px;
   margin-top: 20px;
 }
+
+.pipeline-column.drag-over {
+  background: #f1f5f9;
+  border: 2px dashed #3b82f6;
+}
+
+.pipeline-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.pipeline-card button {
+  margin-top: 10px;
+  background: #ef4444;
+}
+
+.pipeline-card button:hover {
+  background: #dc2626;
 }
